@@ -2,37 +2,37 @@
 
 import { useState } from "react";
 
-const navItems = ["Home", "Services", "Industries", "How It Works", "Contact"];
+const navItems = ["Home", "Services", "Industries", "About", "How It Works", "Contact"];
 
 const services = [
-  "Coolroom Installations",
-  "Coolroom Repairs",
-  "Freezer Room Repairs",
-  "Preventative Maintenance",
-  "Commercial Refrigeration Servicing",
-  "Emergency Breakdowns",
+  { title: "Coolroom Installations", icon: "snow" },
+  { title: "Coolroom Repairs", icon: "tool" },
+  { title: "Freezer Room Repairs", icon: "flake" },
+  { title: "Preventative Maintenance", icon: "check" },
+  { title: "Commercial Refrigeration Servicing", icon: "gear" },
+  { title: "Emergency Breakdowns", icon: "alert" },
 ];
 
 const industries = [
-  "Restaurants & Cafes",
-  "Butchers & Bakeries",
-  "Supermarkets & Retail",
-  "Warehouses & Cold Storage",
-  "Food Manufacturing",
-  "Medical & Pharmaceutical Storage",
+  { title: "Restaurants & Cafes", icon: "cloche" },
+  { title: "Butchers & Bakeries", icon: "van" },
+  { title: "Supermarkets & Retail", icon: "cart" },
+  { title: "Warehouses & Cold Storage", icon: "warehouse" },
+  { title: "Food Manufacturing", icon: "factory" },
+  { title: "Medical & Pharmaceutical Storage", icon: "medical" },
 ];
 
 const trustPoints = [
-  "24/7 Emergency Support",
-  "All Brands Serviced",
-  "Quality Guaranteed",
+  { title: "24/7", label: "Emergency Support", icon: "snow" },
+  { title: "All Brands", label: "Serviced", icon: "gear" },
+  { title: "Quality", label: "Guaranteed", icon: "shield" },
 ];
 
 const howItWorks = [
-  "Customer sends enquiry",
-  "Micah captures the details",
-  "DOS Calendar organises the booking",
-  "Bell Frost follows up fast",
+  { title: "Customer", text: "sends enquiry", icon: "chat" },
+  { title: "Micah", text: "captures the details", icon: "person" },
+  { title: "DOS Calendar", text: "organises the booking", icon: "calendar" },
+  { title: "Bell Frost", text: "follows up fast", icon: "check" },
 ];
 
 export function SiteShell() {
@@ -40,16 +40,17 @@ export function SiteShell() {
 
   return (
     <main>
-      <div className="trust-bar" aria-label="Business trust details">
-        <span>Service All Areas</span>
-        <span>24/7 Emergency Support</span>
-        <span>Never Miss a Booking</span>
+      <div className="top-bar" aria-label="Business trust details">
+        <span className="top-item top-location">Service All Areas</span>
+        <span className="top-item top-support">24/7 Emergency Support</span>
+        <span className="top-item top-calendar">Never Miss a Booking</span>
       </div>
 
       <header className="site-header">
         <a className="logo" href="#home" aria-label="Bell Frost Coolroom home">
-          {/* Replace this wordmark with the approved Bell Frost logo asset when available. */}
-          <span className="logo-mark">BF</span>
+          <span className="logo-bear" aria-hidden="true">
+            <span />
+          </span>
           <span>
             <strong>Bell Frost</strong>
             <small>Coolroom</small>
@@ -81,193 +82,187 @@ export function SiteShell() {
         </nav>
 
         <a className="call-button header-call" href="tel:0413741695">
-          Call 0413 741 695
+          0413 741 695
         </a>
       </header>
 
-      <section className="hero section-shell" id="home">
+      <section className="hero" id="home" aria-label="Bell Frost Coolroom hero">
+        <div className="hero-brand-card" aria-hidden="true">
+          <span className="van-logo-bear" />
+          <span>
+            <strong>Bell Frost</strong>
+            <small>Coolroom</small>
+          </span>
+        </div>
+
         <div className="hero-copy">
           <p className="eyebrow">Commercial Refrigeration Specialists</p>
-          <h1>Keeping Your Business Cool.</h1>
+          <h1>
+            Keeping Your Business <span>Cool.</span>
+          </h1>
           <p className="hero-subtitle">
             Coolroom installations, servicing & repairs you can rely on. 24/7.
           </p>
 
           <div className="trust-grid">
             {trustPoints.map((point) => (
-              <div className="trust-card" key={point}>
-                <span className="mini-icon" aria-hidden="true" />
-                <strong>{point}</strong>
+              <div className="trust-card" key={point.label}>
+                <span className={`line-icon icon-${point.icon}`} aria-hidden="true" />
+                <strong>{point.title}</strong>
+                <span>{point.label}</span>
               </div>
             ))}
           </div>
 
           <div className="hero-actions">
             <a className="primary-button" href="tel:0413741695">
-              Call Now
+              0413 741 695
             </a>
             <a className="secondary-button" href="#contact">
               Request a Quote
             </a>
           </div>
         </div>
+      </section>
 
-        <div className="hero-photo-card" aria-label="Realistic Bell Frost service photo placeholder">
-          {/* Replace this CSS background with a real licensed tradie, branded van and coolroom photo. */}
-          <div className="photo-overlay">
-            <div className="van-panel">
-              <span>Bell Frost</span>
-              <strong>Coolroom Service Van</strong>
-            </div>
-            <div className="technician-card">
-              <span>Commercial Technician</span>
-              <strong>Ready 24/7</strong>
-            </div>
+      <section className="booking-system section-shell" id="how-it-works">
+        <aside className="scw-panel" aria-label="SCW and Micah panel">
+          <div className="scw-ribbon">SCW + Micah</div>
+          <div className="scw-logo">SCW</div>
+          <p>Powered by SCW</p>
+          <div className="micah-badge">
+            <span className="line-icon icon-calendar" aria-hidden="true" />
+            <strong>Micah</strong>
+            <small>Booking System</small>
           </div>
+          <ul>
+            <li>Captures Enquiries</li>
+            <li>Books More Jobs</li>
+            <li>Saves You Time</li>
+          </ul>
+        </aside>
+
+        <div className="how-copy">
+          <p className="eyebrow">How It Works</p>
+          <h2>Micah Booking System</h2>
+          <p className="powered">Powered by SCW + DOS Calendar</p>
+
+          <div className="flow" aria-label="Micah booking flow">
+            {howItWorks.map((step, index) => (
+              <article className="flow-step" key={step.title}>
+                <span className={`line-icon icon-${step.icon}`} aria-hidden="true" />
+                <strong>{index + 1}</strong>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <aside className="booking-card" aria-label="New enquiry booking card">
+          <p className="booking-label">New enquiry received</p>
+          <dl>
+            <div>
+              <dt>Customer</dt>
+              <dd>ABC Fresh Foods</dd>
+            </div>
+            <div>
+              <dt>Service needed</dt>
+              <dd>Coolroom Repair</dd>
+            </div>
+            <div>
+              <dt>Preferred time</dt>
+              <dd>24 May 2025<br />10:00 AM</dd>
+            </div>
+          </dl>
+          <div className="calendar-confirm">
+            <span className="line-icon icon-calendar" aria-hidden="true" />
+            Booked in DOS Calendar
+          </div>
+        </aside>
+      </section>
+
+      <section className="services-section section-shell" id="services">
+        <p className="section-label">Our Services</p>
+        <div className="service-grid">
+          {services.map((service) => (
+            <article className="service-card" key={service.title}>
+              <span className={`line-icon icon-${service.icon}`} aria-hidden="true" />
+              <h3>{service.title}</h3>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="micah-section section-shell" id="how-it-works">
-        <div className="booking-visual">
-          {/* Replace this mock booking card with the real SCW/Micah embed when connected. */}
-          <div className="phone-frame">
-            <div className="phone-top" />
-            <div className="booking-card">
-              <p className="booking-label">New enquiry received</p>
-              <h3>Customer name</h3>
-              <dl>
-                <div>
-                  <dt>Service needed</dt>
-                  <dd>Coolroom repair</dd>
-                </div>
-                <div>
-                  <dt>Preferred time</dt>
-                  <dd>Today, 2:30 PM</dd>
-                </div>
-                <div>
-                  <dt>Status</dt>
-                  <dd>Booked in DOS Calendar</dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-          <div className="calendar-card">
-            <div className="calendar-header">DOS Calendar</div>
-            {["8:00 AM - Coolroom Service", "11:00 AM - Preventative Maintenance", "1:30 PM - Emergency Call Out", "3:30 PM - Coolroom Installation"].map(
-              (entry) => (
-                <div className="calendar-entry" key={entry}>
-                  {entry}
-                </div>
-              ),
-            )}
-          </div>
-        </div>
-
-        <div className="micah-copy">
-          <p className="eyebrow">Micah Booking System</p>
-          <h2>Never Miss a Booking</h2>
-          <p>
-            Micah captures enquiries, booking requests and customer details through
-            the Smart Chat Widget, then helps organise the job through DOS Calendar.
-          </p>
-
-          <div className="steps-grid">
-            {howItWorks.map((step, index) => (
-              <article className="step-card" key={step}>
-                <span>{index + 1}</span>
-                <h3>{step}</h3>
+      <section className="industries-section" id="industries">
+        <div className="section-shell industries-inner">
+          <p className="section-label light">Industries We Service</p>
+          <div className="industry-grid">
+            {industries.map((industry) => (
+              <article className="industry-card" key={industry.title}>
+                <span className={`line-icon icon-${industry.icon}`} aria-hidden="true" />
+                <h3>{industry.title}</h3>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="split-section" id="services">
-        <div className="section-shell split-grid">
-          <div>
-            <p className="eyebrow light">Our Services</p>
-            <h2>Reliable refrigeration support for busy operators.</h2>
-            <div className="list-grid">
-              {services.map((service) => (
-                <article className="service-card" key={service}>
-                  <span className="card-dot" />
-                  <h3>{service}</h3>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <div id="industries">
-            <p className="eyebrow light">Industries</p>
-            <h2>Built for commercial cold-chain environments.</h2>
-            <div className="list-grid">
-              {industries.map((industry) => (
-                <article className="industry-card" key={industry}>
-                  <span className="card-dot" />
-                  <h3>{industry}</h3>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="emergency section-shell">
+      <section className="emergency section-shell" id="about">
+        <span className="emergency-shield" aria-hidden="true">
+          <span className="van-logo-bear" />
+        </span>
         <div>
-          <p className="eyebrow">Local. Reliable. Professional.</p>
-          <h2>24/7 emergency support when your cold room cannot wait.</h2>
-          <p>Proudly servicing businesses across all areas with fast response and clear follow-up.</p>
+          <h2>24/7 Emergency Support</h2>
+          <p>When you need us, we&apos;re there.</p>
         </div>
         <a className="primary-button" href="tel:0413741695">
-          Call 0413 741 695
+          0413 741 695
         </a>
       </section>
 
-      <section className="contact section-shell" id="contact">
-        <div>
-          <p className="eyebrow">Request a Quote</p>
-          <h2>Tell Bell Frost what needs cooling.</h2>
-          <p>
-            This static form is ready for a future enquiry workflow. It is not connected
-            to a backend yet.
-          </p>
-        </div>
-        <form className="contact-form" aria-label="Static quote request form">
-          <label>
-            Name
-            <input type="text" name="name" placeholder="Your name" />
-          </label>
-          <label>
-            Phone
-            <input type="tel" name="phone" placeholder="0413 741 695" />
-          </label>
-          <label>
-            Service Needed
-            <select name="service" defaultValue="">
-              <option value="" disabled>
-                Choose a service
-              </option>
-              {services.map((service) => (
-                <option key={service} value={service}>
-                  {service}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Message
-            <textarea name="message" placeholder="Briefly describe the job" rows={4} />
-          </label>
-          <button type="button" className="primary-button">
-            Request a Quote
-          </button>
-        </form>
-      </section>
+      <footer className="footer" id="contact">
+        <div className="footer-grid section-shell">
+          <div className="footer-brand">
+            <a className="logo footer-logo" href="#home" aria-label="Bell Frost Coolroom home">
+              <span className="logo-bear" aria-hidden="true">
+                <span />
+              </span>
+              <span>
+                <strong>Bell Frost</strong>
+                <small>Coolroom</small>
+              </span>
+            </a>
+            <p>Keeping your business cool.</p>
+            <span className="footer-bear" aria-hidden="true" />
+          </div>
 
-      <footer className="footer">
-        <strong>Bell Frost Coolroom</strong>
-        <span>Keeping your business cool.</span>
-        <span>© 2026 Bell Frost Coolroom. All rights reserved.</span>
+          <div>
+            <h2>Quick Links</h2>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#industries">Industries</a>
+            <a href="#about">About</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <div>
+            <h2>Contact Us</h2>
+            <a href="tel:0413741695">0413 741 695</a>
+            <a href="mailto:info@bellfrost.com.au">info@bellfrost.com.au</a>
+            <span>Service All Areas</span>
+          </div>
+
+          <div>
+            <h2>Get a Quote</h2>
+            <p>Fast, simple & hassle-free.</p>
+            <a className="secondary-button" href="#home">
+              Request a Quote
+            </a>
+          </div>
+        </div>
+        <p className="copyright">© 2026 Bell Frost Coolroom. All rights reserved.</p>
       </footer>
     </main>
   );
